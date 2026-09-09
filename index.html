@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumiére Events: Estruturas de LED e cobertura fotográfica para eventos</title>
+<meta name="description" content="Lumiére Events: arcos de LED, plataforma 360°, cabines fotográficas e pistas de dança para casamentos, debutantes, corporativo e festas. A luz do seu evento, elevada.">
+<meta property="og:title" content="Lumiére Events">
+<meta property="og:description" content="Estruturas de LED e cobertura fotográfica para eventos marcantes.">
+<link rel="icon" href="assets/logos/badge-onblack-white.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+<!-- ===== FLOATING WHATSAPP ===== -->
+<a class="whatsapp-float" href="https://wa.me/5521970383997" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i data-lucide="message-circle"></i>
+  <span class="tooltip">Fale com a Lumiére agora</span>
+</a>
+
+<!-- ===== HEADER ===== -->
+<header id="site-header">
+  <a href="#hero" class="brand-wordmark">Lumiére <span class="sub">events</span></a>
+  <nav id="nav">
+    <a href="#estruturas">Estruturas</a>
+    <a href="#produtos">Catálogo</a>
+    <a href="#gallery">Galeria</a>
+    <a href="#combos">Combos</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <div class="header-actions">
+    <a class="btn btn-primary btn-sm desktop-only" href="#contato">Solicitar orçamento</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <img class="hero-bg-img" src="assets/fotos/IMG_2391.jpg" alt="Arco de LED dourado e plataforma 360° montados em decoração de casamento">
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <div class="eyebrow"><i data-lucide="sparkles" style="width:14px;height:14px"></i> Lumiére Events</div>
+    <h1>A luz do seu evento, elevada.</h1>
+    <p class="hero-sub">Arcos de LED, plataforma 360°, cabines fotográficas e pistas de dança: estruturas marcantes para casamentos, debutantes, corporativo e festas infantis. Tecnologia, brilho e organização do início ao fim.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contato">Solicitar orçamento</a>
+      <a class="btn btn-outline-inverse" href="#estruturas">Ver estruturas</a>
+    </div>
+    <div class="hero-signature"><span class="script-accent">uuou.</span> é o som que seu convidado vai fazer</div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<div id="stats">
+  <div class="wrap stats-grid">
+    <div class="reveal">
+      <div class="stat-num" data-target="100">0</div>
+      <div class="stat-label">Eventos realizados</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num" data-target="20">0</div>
+      <div class="stat-label">Estruturas disponíveis</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num" data-target="98">0</div>
+      <div class="stat-label">% de satisfação</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num" data-target="10">0</div>
+      <div class="stat-label">Anos de mercado</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ESTRUTURAS (services) ===== -->
+<section id="estruturas">
+  <div class="wrap">
+    <div class="section-header left reveal">
+      <div class="eyebrow">Nossos serviços</div>
+      <h2 class="section-title">Estruturas que iluminam o seu momento marcante</h2>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ===== CATÁLOGO ===== -->
+<section id="produtos">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <div class="eyebrow">Catálogo completo</div>
+      <h2 class="section-title">Nossas <em style="font-style:italic">estruturas</em></h2>
+      <p class="section-desc" style="margin:0 auto">Iluminação, estruturas e cobertura audiovisual para deixar seu evento no nível que ele merece.</p>
+    </div>
+    <div class="filter-bar reveal" id="filterBar"></div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== GALERIA ===== -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-header left reveal">
+      <div class="eyebrow">Eventos reais</div>
+      <h2 class="section-title">Um pouco da nossa luz em festa</h2>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL ===== -->
+<section id="testimonials">
+  <div class="wrap">
+    <p class="testimonial-quote reveal">"A plataforma 360° foi o centro das atenções da festa. Todo mundo queria gravar de novo."</p>
+    <div class="testimonial-attr reveal">Convidada, casamento no Rio de Janeiro</div>
+  </div>
+</section>
+
+<!-- ===== COMBOS ===== -->
+<section id="combos">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <div class="eyebrow">Ofertas especiais</div>
+      <h2 class="section-title">Combos Lumiére</h2>
+      <p class="section-desc" style="margin:0 auto">Pacotes completos com tudo que você precisa para um evento de sucesso.</p>
+    </div>
+    <div class="combos-grid" id="combosGrid"></div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <div class="eyebrow">Dúvidas frequentes</div>
+      <h2 class="section-title">Perguntas frequentes</h2>
+      <p class="section-desc" style="margin:0 auto">Tire suas dúvidas sobre o nosso serviço e o aluguel das estruturas.</p>
+    </div>
+    <div class="faq-list reveal" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<section id="cta-banner">
+  <div class="wrap">
+    <h2>Pronta para iluminar o seu evento?</h2>
+    <p>Resposta em até 1 dia útil · atendemos casamentos, debutantes, corporativo e mais.</p>
+    <a class="btn btn-primary" href="#contato">Solicitar orçamento</a>
+  </div>
+</section>
+
+<!-- ===== CONTATO ===== -->
+<section id="contato">
+  <div class="wrap contact-wrap">
+    <div class="contact-info reveal">
+      <div class="eyebrow" style="margin-bottom:12px">Contato</div>
+      <h3>Vamos criar algo <span class="accent">marcante</span> juntos!</h3>
+      <p>Entre em contato pelo WhatsApp ou preencha o formulário. Respondemos rapidinho.</p>
+      <a class="channel-btn" href="https://wa.me/5521970383997" target="_blank" rel="noopener">
+        <div class="channel-icon"><i data-lucide="message-circle"></i></div>
+        <div class="channel-text">
+          <strong>WhatsApp</strong>
+          <span>Resposta em minutos</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="contact-form reveal">
+      <h4>Envie uma mensagem</h4>
+      <div class="form-group">
+        <label>Seu nome</label>
+        <input type="text" id="formName" placeholder="Seu nome completo">
+      </div>
+      <div class="form-group">
+        <label>Tipo de evento</label>
+        <select id="formEventType">
+          <option value="">Selecione...</option>
+          <option>Casamento</option>
+          <option>Debutante (15 anos)</option>
+          <option>Aniversário</option>
+          <option>Corporativo</option>
+          <option>Infantil</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensagem</label>
+        <textarea id="formMessage" placeholder="Conte-nos sobre o seu evento…"></textarea>
+      </div>
+      <button class="btn btn-primary btn-block" onclick="sendMessage()">Enviar mensagem</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer id="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-wordmark">Lumiére <span class="sub">events</span></div>
+        <p>Estruturas de LED e cobertura fotográfica para eventos marcantes: casamentos, debutantes, corporativo e festas.</p>
+        <div class="social-links">
+          <a class="social-link" href="https://instagram.com/lumi.ev" target="_blank" rel="noopener" title="Instagram"><i data-lucide="instagram"></i></a>
+          <a class="social-link" href="#" title="Facebook"><i data-lucide="facebook"></i></a>
+          <a class="social-link" href="#" title="TikTok"><i data-lucide="music-2"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Navegação</h5>
+        <a href="#estruturas">Estruturas</a>
+        <a href="#produtos">Catálogo</a>
+        <a href="#combos">Combos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <div class="footer-col">
+        <h5>Categorias</h5>
+        <a href="#produtos">Plataformas 360°</a>
+        <a href="#produtos">Arcos de LED</a>
+        <a href="#produtos">Cabines fotográficas</a>
+        <a href="#produtos">Fotografia &amp; vídeo</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <p>WhatsApp: (21) 97038-3997</p>
+        <p>@lumi.ev</p>
+        <p>Rio de Janeiro e região</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Lumiére Events. Todos os direitos reservados.</p>
+      <p>Feito com brilho para eventos inesquecíveis</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== PRODUCT MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Fechar"><i data-lucide="x"></i></button>
+    <div class="modal-header"><img id="modalImg" src="" alt="" loading="lazy"></div>
+    <div class="modal-body">
+      <div class="modal-category" id="modalCategory"></div>
+      <h2 class="modal-name" id="modalName"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <div class="modal-cta">
+        <a class="btn btn-primary" id="modalWA" href="#" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> Solicitar pelo WhatsApp</a>
+        <button class="btn btn-ghost" onclick="closeModal()">Voltar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GALLERY LIGHTBOX ===== -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fechar"><i data-lucide="x"></i></button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"><i data-lucide="check-circle"></i> <span id="toastMsg">Enviado!</span></div>
+
+<script src="script.js"></script>
+</body>
+</html>
