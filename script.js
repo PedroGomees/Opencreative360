@@ -222,7 +222,7 @@ const faqs = [
   { q: 'Como reservo a data com vocês?', a: 'Pedimos um sinal para confirmar a data na agenda e garantir sua reserva. O valor restante é pago no dia do evento.' },
 ];
 
-// ===== RENDER: CATALOG (flip cards) =====
+// ===== RENDER: CATALOG (blur-reveal cards) =====
 const allCategories = () => ['Todos', ...new Set(produtos.map(p => p.categoria))];
 let activeFilter = 'Todos';
 
@@ -238,33 +238,32 @@ function setFilter(cat) {
   renderProducts();
 }
 
-function toggleFlip(el, event) {
+function toggleReveal(el, event) {
   event.stopPropagation();
-  el.classList.toggle('flipped');
+  el.classList.toggle('revealed');
 }
 
 function renderProducts() {
   const filtered = activeFilter === 'Todos' ? produtos : produtos.filter(p => p.categoria === activeFilter);
   const grid = document.getElementById('productsGrid');
   grid.innerHTML = filtered.map(p => `
-    <div class="product-flip reveal visible" onclick="toggleFlip(this, event)">
-      <div class="flip-inner">
-        <div class="flip-front${p.badge === 'Destaque' ? ' featured' : ''}">
-          <div class="flip-icon"><i data-lucide="${CATEGORY_ICON[p.categoria] || 'sparkles'}"></i></div>
-          <span class="tag">${p.categoria}</span>
+    <div class="product-reveal reveal visible" onclick="toggleReveal(this, event)">
+      <div class="reveal-photo" style="background-image:url('${p.imagem}')"></div>
+      <div class="reveal-content${p.badge === 'Destaque' ? ' featured' : ''}">
+        <div class="reveal-icon"><i data-lucide="${CATEGORY_ICON[p.categoria] || 'sparkles'}"></i></div>
+        <span class="tag">${p.categoria}</span>
+        <div class="product-name">${p.nome}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="reveal-hint"><i data-lucide="image"></i> Toque para revelar a foto</div>
+      </div>
+      <div class="reveal-overlay">
+        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+        <div class="reveal-overlay-content">
+          <div class="product-category">${p.categoria}</div>
           <div class="product-name">${p.nome}</div>
-          <div class="product-desc">${p.desc}</div>
-          <div class="flip-hint"><i data-lucide="image"></i> Toque para ver a foto</div>
-        </div>
-        <div class="flip-back" style="background-image:url('${p.imagem}')">
-          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
-          <div class="flip-back-content">
-            <div class="product-category">${p.categoria}</div>
-            <div class="product-name">${p.nome}</div>
-            <div class="product-footer">
-              <div class="product-price">Preço: <strong>${p.preco}</strong></div>
-              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); openModal(${p.id})">Ver detalhes</button>
-            </div>
+          <div class="product-footer">
+            <div class="product-price">Preço: <strong>${p.preco}</strong></div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); openModal(${p.id})">Ver detalhes</button>
           </div>
         </div>
       </div>
