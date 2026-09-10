@@ -199,12 +199,16 @@ const combos = [
 
 // ===== GALLERY (real event photography) =====
 const galeria = [
-  { src: 'assets/fotos/IMG_2391.jpg', alt: 'Arco de LED dourado com plataforma 360° em casamento' },
-  { src: 'assets/fotos/IMG_2393.jpg', alt: 'Arco de LED azul e verde com plataforma 360° em casamento' },
-  { src: 'assets/fotos/IMG_2395.jpg', alt: 'Arco de LED rosa e roxo com plataforma 360° em casamento' },
-  { src: 'assets/fotos/arco-led.jpeg', alt: 'Arco de LED montado em evento' },
-  { src: 'assets/fotos/IMG_3446.jpg', alt: 'Bastões de LED vermelhos ao redor da plataforma 360°' },
-  { src: 'assets/fotos/IMG_3718.jpg', alt: 'Bastões de LED azul e verde em corredor decorado' },
+  { src: 'assets/fotos/espelhada-debutante.jpg', alt: 'Debutante fotografada dentro da cabine espelhada com balões', caption: 'Cabine Espelhada · Debutante' },
+  { src: 'assets/fotos/IMG_2391.jpg', alt: 'Arco de LED dourado com plataforma 360° em casamento', caption: 'Arco de LED · Casamento' },
+  { src: 'assets/fotos/pista-starburst.jpg', alt: 'Pista de LED azul vista de cima em formato de estrela', caption: 'Pista de LED' },
+  { src: 'assets/fotos/IMG_2393.jpg', alt: 'Arco de LED azul e verde com plataforma 360° em casamento', caption: 'Arco de LED · Casamento' },
+  { src: 'assets/fotos/tunel-arco-iris.jpg', alt: 'Túnel de LED colorido montado em festa à beira-mar', caption: 'Arco de LED · Festa ao ar livre' },
+  { src: 'assets/fotos/IMG_2395.jpg', alt: 'Arco de LED rosa e roxo com plataforma 360° em casamento', caption: 'Arco de LED · Casamento' },
+  { src: 'assets/fotos/plataforma-vermelha.jpg', alt: 'Plataforma 360° vista de cima com iluminação vermelha', caption: 'Plataforma 360°' },
+  { src: 'assets/fotos/arco-led.jpeg', alt: 'Arco de LED montado em evento', caption: 'Arco de LED' },
+  { src: 'assets/fotos/IMG_3446.jpg', alt: 'Bastões de LED vermelhos ao redor da plataforma 360°', caption: 'Plataforma + Bastões de LED' },
+  { src: 'assets/fotos/IMG_3718.jpg', alt: 'Bastões de LED azul e verde em corredor decorado', caption: 'Plataforma + Bastões de LED' },
 ];
 
 // ===== FAQ =====
@@ -296,13 +300,48 @@ function renderCombos() {
   if (window.lucide) window.lucide.createIcons();
 }
 
-// ===== RENDER: GALLERY =====
+// ===== RENDER: GALLERY (carousel) =====
 function renderGallery() {
-  document.getElementById('galleryGrid').innerHTML = galeria.map((g, i) => `
+  const track = document.getElementById('galleryGrid');
+  track.innerHTML = galeria.map((g) => `
     <div class="gallery-tile reveal visible" onclick="openLightbox('${g.src}', '${g.alt.replace(/'/g, "\\'")}')">
       <img src="${g.src}" alt="${g.alt}" loading="lazy">
+      ${g.caption ? `<span class="gallery-caption">${g.caption}</span>` : ''}
     </div>
   `).join('');
+
+  const dotsEl = document.getElementById('galleryDots');
+  dotsEl.innerHTML = galeria.map((_, i) => `<span data-i="${i}"></span>`).join('');
+  const dots = Array.from(dotsEl.children);
+  dots.forEach(dot => dot.addEventListener('click', () => {
+    const tile = track.children[dot.dataset.i];
+    track.scrollTo({ left: tile.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+  }));
+
+  const prevBtn = document.getElementById('galleryPrev');
+  const nextBtn = document.getElementById('galleryNext');
+  const scrollAmount = () => track.children[0].getBoundingClientRect().width + 20;
+  prevBtn.addEventListener('click', () => track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+  nextBtn.addEventListener('click', () => track.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
+
+  function updateActiveDot() {
+    const tiles = Array.from(track.children);
+    const trackLeft = track.getBoundingClientRect().left;
+    let closest = 0;
+    let minDist = Infinity;
+    tiles.forEach((tile, i) => {
+      const dist = Math.abs(tile.getBoundingClientRect().left - trackLeft);
+      if (dist < minDist) { minDist = dist; closest = i; }
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+    prevBtn.disabled = track.scrollLeft < 8;
+    nextBtn.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
+  }
+  track.addEventListener('scroll', () => {
+    clearTimeout(track._scrollTimer);
+    track._scrollTimer = setTimeout(updateActiveDot, 80);
+  });
+  updateActiveDot();
 }
 
 // ===== RENDER: FAQ =====
