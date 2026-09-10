@@ -1,15 +1,13 @@
 // ===== WHATSAPP NUMBER =====
 const WHATSAPP = '5521970383997';
 
-// ===== SERVICES (flagship structures) =====
-const SERVICES = [
-  { icon: 'circle-dashed', tag: 'LED', title: 'Arco de LED', desc: 'Arco decorativo em LED para entradas e cerimônias marcantes.' },
-  { icon: 'camera', tag: 'Foto', title: 'Cabine Fotográfica', desc: 'Cabines espelhadas e acrílicas com LED, interativas e personalizáveis.', featured: true },
-  { icon: 'circle-dot', tag: 'Destaque', title: 'Plataforma 360°', desc: 'Vídeos em câmera lenta com giro 360°, o nosso carro-chefe.', featured: true },
-  { icon: 'grid-3x3', tag: 'LED', title: 'Pista de LED', desc: 'Pista de dança iluminada para o centro das atenções.' },
-  { icon: 'wand-2', tag: 'LED', title: 'Bastões & Setas de LED', desc: 'Iluminação complementar para plataformas e ambientação.' },
-  { icon: 'video', tag: 'Vídeo', title: 'Vídeo & Fotografia', desc: 'Cobertura profissional em foto e vídeo do seu evento.' },
-];
+// ===== CATEGORY ICONS (used on the front face of each catalog card) =====
+const CATEGORY_ICON = {
+  'Plataformas': 'circle-dot',
+  'Cabines': 'camera',
+  'Arcos': 'circle-dashed',
+  'Fotografia & Vídeo': 'video',
+};
 
 // ===== CATALOG (real inventory, migrated from the rental catalog) =====
 const produtos = [
@@ -224,23 +222,7 @@ const faqs = [
   { q: 'Como reservo a data com vocês?', a: 'Pedimos um sinal para confirmar a data na agenda e garantir sua reserva. O valor restante é pago no dia do evento.' },
 ];
 
-// ===== RENDER: SERVICES =====
-function renderServices() {
-  const grid = document.getElementById('servicesGrid');
-  grid.innerHTML = SERVICES.map(s => `
-    <div class="service-card${s.featured ? ' featured' : ''} reveal">
-      <div class="service-icon-row">
-        <i data-lucide="${s.icon}"></i>
-        <span class="tag">${s.tag}</span>
-      </div>
-      <h3>${s.title}</h3>
-      <p>${s.desc}</p>
-      <a class="btn btn-ghost btn-sm" href="#produtos">Saiba mais</a>
-    </div>
-  `).join('');
-}
-
-// ===== RENDER: CATALOG =====
+// ===== RENDER: CATALOG (flip cards) =====
 const allCategories = () => ['Todos', ...new Set(produtos.map(p => p.categoria))];
 let activeFilter = 'Todos';
 
@@ -256,23 +238,34 @@ function setFilter(cat) {
   renderProducts();
 }
 
+function toggleFlip(el, event) {
+  event.stopPropagation();
+  el.classList.toggle('flipped');
+}
+
 function renderProducts() {
   const filtered = activeFilter === 'Todos' ? produtos : produtos.filter(p => p.categoria === activeFilter);
   const grid = document.getElementById('productsGrid');
   grid.innerHTML = filtered.map(p => `
-    <div class="product-card reveal visible" onclick="openModal(${p.id})">
-      <div class="product-img-wrap">
-        <img src="${p.imagem}" alt="${p.nome}" loading="lazy">
-        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
-        <div class="product-overlay"><span class="btn btn-primary btn-sm">Ver detalhes</span></div>
-      </div>
-      <div class="product-body">
-        <div class="product-category">${p.categoria}</div>
-        <div class="product-name">${p.nome}</div>
-        <div class="product-desc">${p.desc}</div>
-        <div class="product-footer">
-          <div class="product-price">Preço: <strong>${p.preco}</strong></div>
-          <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); openModal(${p.id})">Contratar</button>
+    <div class="product-flip reveal visible" onclick="toggleFlip(this, event)">
+      <div class="flip-inner">
+        <div class="flip-front${p.badge === 'Destaque' ? ' featured' : ''}">
+          <div class="flip-icon"><i data-lucide="${CATEGORY_ICON[p.categoria] || 'sparkles'}"></i></div>
+          <span class="tag">${p.categoria}</span>
+          <div class="product-name">${p.nome}</div>
+          <div class="product-desc">${p.desc}</div>
+          <div class="flip-hint"><i data-lucide="image"></i> Toque para ver a foto</div>
+        </div>
+        <div class="flip-back" style="background-image:url('${p.imagem}')">
+          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+          <div class="flip-back-content">
+            <div class="product-category">${p.categoria}</div>
+            <div class="product-name">${p.nome}</div>
+            <div class="product-footer">
+              <div class="product-price">Preço: <strong>${p.preco}</strong></div>
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); openModal(${p.id})">Ver detalhes</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -473,7 +466,6 @@ function showToast(message) {
 }
 
 // ===== INIT =====
-renderServices();
 renderFilters();
 renderProducts();
 renderCombos();
